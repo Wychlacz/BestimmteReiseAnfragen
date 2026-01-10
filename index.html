@@ -5,80 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reiseanfrage | Art Reisen</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Nunito', sans-serif; background-color: #f5f2eb; color: #333333; }
-        h1, h2, .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .brand-blue { color: #0085cd; }
-        .bg-brand-blue { background-color: #0085cd; }
-        .bg-brand-orange { background-color: #f49700; }
-    </style>
-</head>
-<body class="min-h-screen flex items-center justify-center p-4">
-
-    <div class="max-w-lg w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <!-- Header -->
-        <div class="bg-brand-blue p-6 text-white">
-            <h1 class="text-2xl font-bold">Reiseanfrage</h1>
-            <p class="opacity-90">Schön, dass du mit uns die Welt entdecken möchtest.</p>
-        </div>
-
-        <!-- Formular -->
-        <form name="reiseanfrage" method="POST" data-netlify="true" class="p-8 space-y-5">
-            <!-- Hidden Field für Netlify -->
-            <input type="hidden" name="form-name" value="reiseanfrage" />
-
-            <div>
-                <label class="block text-sm font-semibold mb-1">Gewählte Reise</label>
-                <input type="text" id="reiseDisplay" name="reise" readonly 
-                    class="w-full p-3 bg-gray-100 border border-gray-200 rounded-xl font-semibold text-gray-600 outline-none">
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-semibold mb-1">Dein Name*</label>
-                    <input type="text" name="name" required placeholder="Vor- & Nachname"
-                        class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-1">E-Mail*</label>
-                    <input type="email" name="email" required placeholder="deine@mail.de"
-                        class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-            </div>
-
-            <div>
-                <label class="block text-sm font-semibold mb-1">Telefon (optional)</label>
-                <input type="tel" name="telefon" placeholder="Für Rückfragen"
-                    class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
-            </div>
-
-            <div>
-                <label class="block text-sm font-semibold mb-1">Deine Nachricht (optional)</label>
-                <textarea name="nachricht" rows="3" placeholder="Besondere Wünsche oder Fragen..."
-                    class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
-            </div>
-
-            <button type="submit" 
-                class="w-full bg-brand-orange hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition-all shadow-lg">
-                Anfrage jetzt senden
-            </button>
-        </form>
-    </div>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <script>
-        // URL Parameter auslesen
-        window.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const reise = params.get('reise');
-            const displayFeld = document.getElementById('reiseDisplay');
-            
-            if (reise) {
-                displayFeld.value = decodeURIComponent(reise);
-            } else {
-                displayFeld.value = "Individuelle Anfrage";
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        artBlue: '#0085cd',
+                        artOrange: '#f49700',
+                        artOrangeHover: '#fbb600',
+                        artBg: '#f5f2eb',
+                        artText: '#333333',
+                        artBorder: '#e2e0da',
+                    },
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        nunito: ['Nunito', 'sans-serif'],
+                    }
+                }
             }
-        });
+        }
     </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Nunito', sans-serif; background-color: #f5f2eb; color: #333333; }
+        h1, h2, h3, button, label, .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.2.3",
+    "react-dom": "https://esm.sh/react-dom@19.2.3",
+    "react-dom/client": "https://esm.sh/react-dom@19.2.3/client",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+</head>
+<body class="bg-artBg text-artText min-h-screen">
+    <div id="root"></div>
 </body>
 </html>

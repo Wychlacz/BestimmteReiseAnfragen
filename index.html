@@ -4,212 +4,209 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reiseanfrage | Art Reisen</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        artBlue: '#0085cd',
+                        artOrange: '#f49700',
+                        artOrangeHover: '#fbb600',
+                        artBg: '#f5f2eb',
+                        artText: '#333333',
+                        artBorder: '#e2e0da',
+                    },
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        nunito: ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Nunito', sans-serif;
             background-color: #f5f2eb;
             color: #333333;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            font-family: 'Nunito', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
-        h1, h2, h3, button, label { font-family: 'Montserrat', sans-serif; }
-        .container {
-            max-width: 650px;
-            width: 100%;
-            background: white;
+        h1, h2, .font-header {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .form-card {
+            background: #ffffff;
             border-radius: 20px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.08);
-            overflow: hidden;
-            animation: fadeIn 0.5s ease-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 2.5rem;
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .header {
-            background: linear-gradient(135deg, #0085cd 0%, #0ea5e9 100%);
-            padding: 40px 32px;
-            text-align: center;
+        .btn-orange {
+            background-color: #f49700;
             color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(244, 151, 0, 0.2);
         }
-        .header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            line-height: 1.3;
-        }
-        .reise-name {
-            font-size: 22px;
-            font-weight: 800;
-            margin: 16px 0;
-            padding: 12px 20px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 12px;
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-        .header p {
-            font-size: 16px;
-            opacity: 0.95;
-            line-height: 1.5;
-        }
-        .form-content {
-            padding: 40px 32px;
-        }
-        .form-group {
-            margin-bottom: 24px;
-        }
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #333333;
-            font-size: 15px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e2e0da;
-            border-radius: 10px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 15px;
-            transition: all 0.3s;
-        }
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #0085cd;
-            box-shadow: 0 0 0 3px rgba(0,133,205,0.1);
-        }
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        .btn-submit {
-            width: 100%;
-            background: #f49700;
-            color: white;
-            font-weight: 700;
-            font-size: 17px;
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 8px;
-        }
-        .btn-submit:hover:not(:disabled) {
-            background: #fbb600;
+        .btn-orange:hover {
+            background-color: #fbb600;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(244, 151, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(244, 151, 0, 0.3);
         }
-        .btn-submit:disabled {
-            background: #cbd5e1;
-            cursor: not-allowed;
-            transform: none;
+        .input-field {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 2px solid #e2e0da;
+            border-radius: 12px;
+            outline: none;
+            transition: border-color 0.2s;
         }
-        .success-message {
-            text-align: center;
-            padding: 60px 20px;
+        .input-field:focus {
+            border-color: #0085cd;
         }
-        .success-icon {
-            font-size: 72px;
-            margin-bottom: 24px;
-            color: #0085cd;
-        }
-        .success-message h2 {
-            color: #0085cd;
-            font-size: 32px;
-            margin-bottom: 16px;
-        }
-        .success-message p {
-            font-size: 18px;
-            color: #333333;
-            line-height: 1.7;
+        .hidden-state {
+            display: none;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Schön, dass Du diese Reise anfragen möchtest!</h1>
-            <div class="reise-name" id="reiseDisplay">Lade...</div>
-            <p>Bitte gib uns Deine Kontaktdaten an, damit wir Deine individuelle Route mit persönlicher Handschrift entwickeln können.</p>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="form-card fade-in">
+        <!-- Formular Bereich -->
+        <div id="form-container">
+            <h1 class="text-artBlue text-2xl md:text-3xl font-extrabold text-center mb-4 leading-tight">
+                Schön, dass Du diese Reise anfragen möchtest!
+            </h1>
+
+            <!-- Dynamische Reise-Box -->
+            <div id="reise-box" class="bg-artBlue text-white p-4 rounded-xl mb-6 text-center shadow-sm">
+                <span class="text-xs uppercase tracking-widest block opacity-80 mb-1 font-bold">Deine gewählte Reise:</span>
+                <h2 id="reise-name-display" class="text-xl font-extrabold font-header">Individuelle Reiseplanung</h2>
+            </div>
+
+            <p class="text-center text-gray-500 mb-8 text-sm px-4">
+                Bitte gib uns Deine Kontaktdaten an, damit wir Deine individuelle Route mit persönlicher Handschrift entwickeln können.
+            </p>
+
+            <form id="inquiry-form" class="space-y-5">
+                <!-- Hidden Fields -->
+                <input type="hidden" id="reise_id" name="reise_id">
+                <input type="hidden" id="reise_name" name="reise">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1 ml-1 uppercase">Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Vor- und Nachname" class="input-field">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1 ml-1 uppercase">E-Mail *</label>
+                        <input type="email" id="email" name="email" required placeholder="deine@email.de" class="input-field">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1 ml-1 uppercase">Telefon *</label>
+                        <input type="tel" id="telefon" name="telefon" required placeholder="Für Rückfragen" class="input-field">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1 ml-1 uppercase">WhatsApp (opt.)</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="Gleiche Nummer?" class="input-field">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1 ml-1 uppercase">Nachricht / Besondere Wünsche</label>
+                    <textarea id="nachricht" name="nachricht" rows="4" placeholder="Erzähl uns mehr über Deine Träume..." class="input-field resize-none"></textarea>
+                </div>
+
+                <button type="submit" id="submit-btn" class="w-full btn-orange font-header font-extrabold py-4 rounded-xl text-lg mt-2">
+                    Anfrage jetzt senden
+                </button>
+            </form>
         </div>
 
-        <div class="form-content" id="formContent">
-            <form id="reiseanfrageForm">
-                <input type="hidden" id="reiseHidden" name="reise" />
-                <input type="hidden" id="reiseId" name="reise_id" />
-
-                <div class="form-group">
-                    <label for="name">Dein Name *</label>
-                    <input type="text" id="name" name="name" placeholder="Vor- und Nachname" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="email">E-Mail *</label>
-                    <input type="email" id="email" name="email" placeholder="deine@email.de" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="telefon">Telefon *</label>
-                    <input type="tel" id="telefon" name="telefon" placeholder="+49 ..." required />
-                </div>
-
-                <div class="form-group">
-                    <label for="whatsapp">WhatsApp (optional)</label>
-                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="Falls abweichend von Telefon" />
-                </div>
-
-                <div class="form-group">
-                    <label for="nachricht">Deine Nachricht / Besondere Wünsche (optional)</label>
-                    <textarea id="nachricht" name="nachricht" placeholder="Reisezeitraum, Anzahl Personen, besondere Wünsche..."></textarea>
-                </div>
-
-                <button type="submit" class="btn-submit" id="submitBtn">Anfrage jetzt senden</button>
-            </form>
+        <!-- Erfolgsmeldung Bereich -->
+        <div id="success-container" class="hidden-state text-center py-10 fade-in">
+            <div class="text-6xl text-artBlue mb-6">✓</div>
+            <h2 class="text-3xl font-extrabold text-artBlue mb-4">Vielen Dank!</h2>
+            <p class="text-lg text-gray-600 leading-relaxed">
+                Deine Anfrage ist bei uns eingegangen.<br>
+                Wir melden uns in Kürze persönlich bei Dir.
+            </p>
+            <button onclick="window.location.reload()" class="mt-8 text-artBlue font-bold hover:underline">Neue Anfrage starten</button>
         </div>
     </div>
 
     <script>
-        const MAKE_WEBHOOK_URL = "HIER_DEINE_ZWEITE_MAKE_WEBHOOK_URL_EINTRAGEN";
+        // HIER DEINEN MAKE WEBHOOK EINSETZEN
+        const WEBHOOK_URL = "https://hook.eu2.make.com/h9lnttea4p31xjarehaydk9i55q57eup";
 
-        // Reisedaten aus URL laden
-        window.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
-            const reiseName = params.get('reise') ? decodeURIComponent(params.get('reise')) : "Individuelle Anfrage";
-            const reiseId = params.get('id') ? decodeURIComponent(params.get('id')) : "";
+            const reiseName = params.get('reise') ? decodeURIComponent(params.get('reise')) : "Individuelle Reiseplanung";
+            const reiseId = params.get('id') ? decodeURIComponent(params.get('id')) : "keine-id";
 
-            document.getElementById('reiseDisplay').textContent = reiseName;
-            document.getElementById('reiseHidden').value = reiseName;
-            document.getElementById('reiseId').value = reiseId;
+            // UI aktualisieren
+            document.getElementById('reise-name-display').innerText = reiseName;
+            
+            // Hidden Inputs füllen
+            document.getElementById('reise_name').value = reiseName;
+            document.getElementById('reise_id').value = reiseId;
         });
 
-        // Formular absenden
-        document.getElementById('reiseanfrageForm').addEventListener('submit', async (e) => {
+        const form = document.getElementById('inquiry-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const formContainer = document.getElementById('form-container');
+        const successContainer = document.getElementById('success-container');
+
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const submitBtn = document.getElementById('submitBtn');
+            // Loading State
             submitBtn.disabled = true;
-            submitBtn.textContent = "Wird gesendet...";
+            submitBtn.innerText = "Wird gesendet...";
+            submitBtn.style.opacity = "0.7";
 
-            const formData = new FormData(e.target);
+            const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
             try {
-                const response = await fetch(MAKE_WEBHOOK_URL, {
+                const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
 
                 if (response.ok) {
-                    // Erfolgsmeldung anzeigen
-                    document.getElementById('formContent').innerHTML = `
-                        <div class="success-message">
-                            <div class="success-icon">✓</div>
-                            <h2>Vielen
+                    // Erfolg
+                    formContainer.classList.add('hidden-state');
+                    successContainer.classList.remove('hidden-state');
+                } else {
+                    throw new Error('Senden fehlgeschlagen');
+                }
+            } catch (error) {
+                console.error('Submission Error:', error);
+                alert('Es gab ein Problem beim Senden. Bitte versuche es noch einmal oder kontaktiere uns direkt.');
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Anfrage jetzt senden";
+                submitBtn.style.opacity = "1";
+            }
+        });
+    </script>
+</body>
+</html>
